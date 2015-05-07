@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>Astrology Test</h2>
+
+<input id="dateInput" type="text" placeholder="day">
+<input id="monthInput" type="text" placeholder="month">
+<button id="sendDateMonth">Get description</button>
+
+
+<script src="js/astrology.js"></script>
+<script>
+
+    var astrology = new Astrology();
+
+
+    var button = document.getElementById('sendDateMonth');
+    button.addEventListener('click', function(){
+        var date = document.getElementById('dateInput').value;
+        var month = document.getElementById('monthInput').value;
+
+        astrology.addCurrentDate(date);
+        astrology.addCurrentMonth(month);
+
+        console.log("Your sign is drum.. roll..." + astrology.fetchStarSign());
+    });
+
+</script>
+</body>
+</html>
