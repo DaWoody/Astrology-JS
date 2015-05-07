@@ -1,0 +1,23 @@
+{
+  "name": "astrology",
+  "version": "1.0.0",
+  "description": "A library for getting some Astrology info from the js side",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://DaWoody@bitbucket.org/DaWoody/astrology.git"
+  },
+  "keywords": [
+    "Astrology",
+    "javascript",
+    "library"
+  ],
+  "author": "J Wedfelt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}

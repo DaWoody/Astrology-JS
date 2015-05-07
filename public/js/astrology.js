@@ -362,11 +362,14 @@ Astrology.prototype.addCurrentDate = function(date){
 
     if(typeof date === "string"){
         try {
-            parseInt(date, 10);
+            var dateNumber = parseInt(date, 10);
+            this.currentSearch.date = dateNumber;
         } catch(e){
-
+            console.log('We threw and error the date we tried to set is NOT a string that could be parsed into a number');
+            console.log(e);
         }
     }
+    //FIX AND ADD STUFF HERE
     this.currentSearch.date = date;
 };
 
@@ -433,30 +436,38 @@ Astrology.prototype.getStarSignsDescriptions = function(){
             element:"earth",
             symbol:"The Bull",
             description: "Underneath their cool, calm and collected exterior, Taureans differ greatly from all the other signs of the zodiac. Taureans manage to discreetly stay apart from the crowd, even though they have a well-earned reputation for being socialisers. They will let others get close, but only so close as they want them. Some claim that trying to get your point across to a Taurean, should they not want to hear you, is rather similar to talking to the trees � they simply won't budge. And, there is no such thing as an open-book Taurean. Their feelings, fears and desires often run far deeper than anyone around them would guess. Like the butterfly that chooses to remain hidden in its cocoon until it is ready and prepared to emerge, so the true Taurean spirit remains hidden behind a veneer of day-to-day activities. That's why Taureans are sometimes regarded as snobby, withdrawn, boring, or even sulky. The truth is, when Taureans manage to operate very adequately on their own form of automatic pilot, they can switch off from the world around them very efficiently. And when they do switch off, they are actually gathering in their inner reserves to deal with the outside pressures. This sign is also very closely connected to 'feeling good'. Most Taureans like their creature comforts and hate change because it takes them out of their automatic pilot condition of separating themselves from the world around them. Because they hate to be put in jeopardy of any kind, this is the sign that strives to create tomorrow in advance, rather than leave it to fate. In love, Taureans are regarded as extremely sensual beings. An earth sign, they deal well with the personal, physical senses and consequently all the pleasures associated with what they can see, touch, smell and taste, add up to a special delight to them. Often nature and pet lovers, Taureans are closely associated with all things off the earth and nature."
-        }
+        },
+
+        {
+            zodiacName:"gemini",
+            zodiacNumber:3,
+            element:"air",
+            symbol:"The Twins",
+            description: "In ancient Greek mythology, Gemini's ruler - Mercury, was the light-footed messenger of the gods who darted back and forth across the heavens delivering news - which might explain why those born under the sign of the 'Twins' are always on the move; thirsty for knowledge and new experiences. Terminally curious and sometimes even mischievous, Geminis are multi-faceted souls who enjoy knowing a little bit of everything but generally not too much about one particular subject. It's just that variety is the spice of their lives! In Astrology, Geminis have also gained the reputation of being the incessant talkers of the zodiac. Those Twins that don't have the 'gift of the gab' are usually talented writers or have a special interest in foreign languages. In love, they look for a partner who can keep up with them mentally and physically! And, to quote Oscar Wilde, 'there's one thing worse than people talking about you, that's people not talking about you.' Whether Geminis like it or not, people are usually 'talking about them'. Together with Scorpio and Virgos, they are a sign that is often discussed, dissected and sometimes even put down by the other signs of the zodiac. Sometimes this is a subtle form of jealousy by others, because Geminis do lead very unique and unusual lives. The Gemini personality can appear mysterious or detached to others and therefore they are often misunderstood and unappreciated for the talents they offer to the world at large. Another reason Geminis evoke so much interest is many born under this sign are multi-dimensionally talented. In money matters, some Geminis are very adept and quick at making it...and spending it too. Many Geminis are involved in international financial wheeling and dealing. They love the adventure and game playing involved in out-thinking other people. Gemini's can be very haphazard about their financial affairs too, with many of them ending up in divorce courts mainly because their partners have become tired of living on the edge of a financial precipice.""
+        },
+
+
 
     ];
-
     return descriptions;
 };
 
-Astrology.prototype.fetchStarSignDescription = function(starSignNameOrNumber){
+Astrology.prototype.fetchStarSignDescription = function(){
+    var starSign = this.fetchStarSign();
     var returnDescription = "";
     var descriptions = this.starSignsDescriptions;
 
-    if(typeof starSignNameOrNumber === "number"){
-        console.log("Fetching desc with number");
+    if(typeof starSign === "number"){
         //A number lets fetch the description through a zodiacNumber check
         for(var i = 0, length = descriptions.length; i < length; i++){
-            if(descriptions[i].zodiacNumber === starSignNameOrNumber){
+            if(descriptions[i].zodiacNumber === starSign){
                 returnDescription = descriptions[i].description;
             }
         }
     } else {
-        console.log("Fetching desc with string");
         //We have a string we are checking against lets do this ;)
         for(var i = 0, length = descriptions.length; i < length; i++){
-            if(descriptions[i].zodiacName === starSignNameOrNumber){
+            if(descriptions[i].zodiacName === starSign){
                 returnDescription = descriptions[i].description;
             }
         }

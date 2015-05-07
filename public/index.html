@@ -12,22 +12,26 @@
 <button id="sendDateMonth">Get description</button>
 
 
-<script src="js/astrology.js"></script>
+<script src="/js/astrology.js"></script>
 <script>
 
-    var astrology = new Astrology();
+
+        var astrology = new Astrology();
 
 
-    var button = document.getElementById('sendDateMonth');
-    button.addEventListener('click', function(){
-        var date = document.getElementById('dateInput').value;
-        var month = document.getElementById('monthInput').value;
+        var button = document.getElementById('sendDateMonth');
+        button.addEventListener('click', function(){
 
-        astrology.addCurrentDate(date);
-        astrology.addCurrentMonth(month);
+            var date = document.getElementById('dateInput').value;
+            var month = document.getElementById('monthInput').value;
 
-        console.log("Your sign is drum.. roll..." + astrology.fetchStarSign());
-    });
+            astrology.addCurrentDate(date);
+            astrology.addCurrentMonth(month);
+            console.log("Your sign is drum.. roll..." + astrology.fetchStarSign());
+            console.log("Description: " + astrology.fetchStarSignDescription());
+        });
+
+
 
 </script>
 </body>
