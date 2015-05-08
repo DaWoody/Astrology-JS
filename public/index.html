@@ -33,6 +33,9 @@
 
             astrology.addCurrentDate(date);
             astrology.addCurrentMonth(month);
+
+            console.log('did we save any data at all..' + astrology.showStoredDataArray());
+
             console.log("Your sign is drum.. roll..." + astrology.fetchStarSign());
             console.log("Description: " + astrology.fetchStarSignDescription());
         });
