@@ -5,13 +5,13 @@
 */
 
 
-var Astrology = function(){
+var Astrology = function(connectionObject){
 
     this.months = []
     this.starSigns = [];
     this.starSignsDescriptions = [];
 
-    this.init();
+    this.init(connectionObject);
 };
 
 
@@ -291,6 +291,29 @@ Astrology.prototype.loadDate = function(dateString){
    */
 };
 
+
+Astrology.prototype.loadInitialData = function(){
+
+};
+
+Astrology.prototype.xhrAndLoadData = function(url, variable){
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status == 200){
+                var response = xhr.response;
+                variable = response;
+                console.log('Loaded data')
+            }
+        }
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'json';
+    xhr.send();
+};
+
 Astrology.prototype.addCurrentMonth = function(monthNumberOrMonthName){
 
     var monthNumber = 0;
@@ -383,7 +406,7 @@ Astrology.prototype.fetchStarSign = function(){
     var zodiacNumber = 0;
 
 
-    var starSigns = this.starSigns;
+    var starSigns = this.starSigns.signs;
 
     for(var i = 0, length = starSigns.length; i < length; i++){
         //  First lets compare the months, will always just be two possible months that can
@@ -420,7 +443,7 @@ Astrology.prototype.fetchStarSign = function(){
 
 Astrology.prototype.getStarSignsDescriptions = function(){
 
-    var descriptions = [
+    /*var descriptions = [
         {
             zodiacName:"aries",
             zodiacNumber:1,
@@ -516,14 +539,19 @@ Astrology.prototype.getStarSignsDescriptions = function(){
             symbol:"The Fish",
             description: "Mysterious and alluring individuals, most Pisces are extremely talented, but even though they are gifted in many ways, they still manage to spend most of their lives battling 'confusing' conditions. Pisces is the sign symbolised by the image of two fish. Their symbol depicts one fish heading upward, the other pulling downward. This mirrors how Pisceans are frequently torn between two pathways in life, or actually do live two very different existences at the same time. The number 2, is a very powerful number for them. This zodiac sign is acknowledged as being the Saint and the Sinner rolled into one; the trendsetter of fashion or art, the lost soul, the philosopher and the psychotic and the visionary. As a credit to them, considering their many vulnerable characteristics; Pisceans are incredibly adaptable and resilient. They are to be found leading the field in many diverse areas of life and many Pisces can be found represented amongst top business millionaires. On the other side of the coin, prisons, reform schools and all kinds of institutions statistically hold a high number of Pisceans too. The Piscean's inner quest to explore their 'ivory tower' syndrome can lead them into some most unusual and unlikely living conditions. Of all the signs of the zodiac, Pisces are the ones who end up in the most muddles over the years of their lives. They fantasize about situations, people and particularly romance - and because they spend so much time in their own form of 'fantasy land' this can catch them short in other more worldly areas. Because of this inner world of fantasy, Pisces people seldom perceive whatever is going on around them in its true light. They see life instead as they want to see it, coloring their view of the world in hues and tones far removed from its true reflection. No wonder this is the sign of both miracles and disillusionment. If you are a Pisces, be warned your emotions are a weak spot. One thing that plays havoc with your life is romance. When things romantically are going well for you, you are on cloud nine. When romance turns sour you land in a heap. Pisces often need to take lots of holidays (or time off) to recover from life's many diverse pressures. You are the zodiac's most sensitive sign, so you need to take extra special care of yourself. Nobody can beat you up, as much as you can beat yourself up within your own mind. In your purest form you are psychic, visionary and a guiding light to all who know you. But, in your 'out of tune' state, you become depressed, obsessive and confused."
         }
-    ];
+    ];*/
+
+    var descriptions;
+
+
+
     return descriptions;
 };
 
 Astrology.prototype.fetchStarSignDescription = function(){
     var starSign = this.fetchStarSign();
     var returnDescription = "";
-    var descriptions = this.starSignsDescriptions;
+    var descriptions = this.starSignsDescriptions.descriptions;
 
     if(typeof starSign === "number"){
         //A number lets fetch the description through a zodiacNumber check
@@ -543,11 +571,57 @@ Astrology.prototype.fetchStarSignDescription = function(){
     return returnDescription;
 };
 
-Astrology.prototype.init = function(){
+Astrology.prototype.sendToConsole = function(message){
+
+    var consoleMessage =  "=============" + "\n";
+        consoleMessage += "* Astrology *" + "\n";
+        consoleMessage += "=============" + "\n";
+        consoleMessage += message;
+
+    console.log(consoleMessage);
+};
+
+Astrology.prototype.initConnectionObject = function(connectionObject){
+
+    var dateDataUrl = '/js/astrology_date_data.json';
+    var descriptionDataUrl =  '/js/astrology_description_data.json';
+
+    var returnObject = {
+        dateDataUrl: dateDataUrl,
+        descriptionDataUrl: descriptionDataUrl
+    };
+
+    try{
+        if(connectionObject === undefined){
+            //Lets do nothing since we have already defined the paths to where to
+        }
+        else {
+            returnObject.dateDataUrl = connectionObject.dateDataUrl || dateDataUrl;
+            returnObject.descriptionDataUrl = connectionObject.descriptionDataUrl || descriptionDataUrl;
+        }
+    } catch(e){
+        //Do nothing since we already have the object instantiated with default values
+    }
+    return returnObject;
+}
+
+Astrology.prototype.init = function(connectionObject){
+
+    var connectionObjectModified = this.initConnectionObject(connectionObject);
+
+    this.connectionObject = {
+        dateDataUrl: connectionObjectModified.dateDataUrl,
+        descriptionDataUrl: connectionObjectModified.descriptionDataUrl
+    };
+
+    this.starSigns = [];
+    this.starSignsDescriptions = [];
+
+    //Load the data
+    this.xhrAndLoadData(this.connectionObject.descriptionDataUrl, this.starSignsDescriptions);
+    this.xhrAndLoadData(this.connectionObject.dateDataUrl, this.starSigns);
 
     this.months = this.getAllMonths();
-    this.starSigns = this.getAllStarSigns();
-    this.starSignsDescriptions = this.getStarSignsDescriptions();
 
     this.currentSearch = {
         date:0,
@@ -556,7 +630,9 @@ Astrology.prototype.init = function(){
         zodiacNumber:0
     };
 
-    console.log('Astrology Object initiated');
+    this.sendToConsole('Object instantiated');
+    this.sendToConsole('Connection dateData url: ' +  this.connectionObject.dateDataUrl);
+    this.sendToConsole('Connection descriptionData url: ' +  this.connectionObject.descriptionDataUrl);
 };
 
 /*
