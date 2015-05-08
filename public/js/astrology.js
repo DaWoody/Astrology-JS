@@ -1,5 +1,20 @@
 /**
 *
+*    --------------------------------------------------------------------------
+*    ## Astrology - A javascript class for sharing astrological information ##
+*    ------------------------------------------------------------------------
+*
+*       Author: Johan Wedfelt
+*       =====================
+*       Project Repo: https://github.org/DaWoody/Astrology-JS
+*       ============
+*       Version 0.1
+*       ============
+*       Description:
+*       ============
+*       A javascript class that initiates by loading some Astrological data to the instantiated class
+*       then there are a number of public methods available to do searches on birthdate etc to get
+*       astrological information back to be printed or used within a DOM structure on a web-page
 *
 *
 */
@@ -8,89 +23,6 @@
 var Astrology = function(connectionObject){
     this.init(connectionObject);
 };
-
-/*
-Astrology.prototype.getAllMonths = function(){
-    var months =
-                [
-                    {
-
-                        monthName:'january',
-                        monthNumber:1,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'february',
-                        monthNumber:2,
-                        endDate:28
-                    },
-
-                    {
-                        monthName:'march',
-                        monthNumber:3,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'april',
-                        monthNumber:4,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'may',
-                        monthNumber:5,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'june',
-                        monthNumber:6,
-                        endDate:31
-                    },
-
-                    {
-
-                        monthName:'july',
-                        monthNumber:7,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'august',
-                        monthNumber:8,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'september',
-                        monthNumber:9,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'october',
-                        monthNumber:10,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'november',
-                        monthNumber:11,
-                        endDate:31
-                    },
-
-                    {
-                        monthName:'december',
-                        monthNumber:12,
-                        endDate:31
-                    }
-                ];
-
-    return months;
-};
-*/
 
 Astrology.prototype.xhrAndLoadJsonToDataArray = function(url, variable){
 
@@ -218,7 +150,6 @@ Astrology.prototype.fetchStarSign = function(){
         if(monthNumber === starSigns[i].start.monthNumber || monthNumber === starSigns[i].end.monthNumber){
             //If the months end or start in the specific month number we have a go and should
             //save the date in our temporary array awesomeness ;)
-
             twoSignsArray.push(starSigns[i]);
         }
     }
@@ -269,11 +200,11 @@ Astrology.prototype.fetchStarSignDescription = function(){
 
 Astrology.prototype.sendToConsole = function(message){
 
-    var consoleMessage =  "=============" + "\n";
-        consoleMessage += "* Astrology *" + "\n";
-        consoleMessage += "=============" + "\n";
-        consoleMessage += message;
-
+    var consoleMessage =  "=================================" + "\n";
+        consoleMessage += "# Astrology" + "\n";
+        consoleMessage += "# Version: " + this.classData.version + " \n";
+        consoleMessage += "# Message: " + message + " \n";
+        consoleMessage += "=================================" + "\n";
     console.log(consoleMessage);
 };
 
@@ -311,15 +242,14 @@ Astrology.prototype.init = function(connectionObject){
         descriptionDataUrl: connectionObjectModified.descriptionDataUrl
     };
 
+    this.classData = {
+        version:'0.1'
+    };
+
     this.starSignsData = {
         signs: [],
         descriptions: []
     };
-
-    //Load the data
-    this.xhrAndLoadJsonToDataArray(this.connectionObject.descriptionDataUrl, 'descriptions');
-    this.xhrAndLoadJsonToDataArray(this.connectionObject.dateDataUrl, 'signs');
-
 
     this.currentSearch = {
         date:0,
@@ -328,25 +258,11 @@ Astrology.prototype.init = function(connectionObject){
         zodiacNumber:0
     };
 
+    //Load the data
+    this.xhrAndLoadJsonToDataArray(this.connectionObject.descriptionDataUrl, 'descriptions');
+    this.xhrAndLoadJsonToDataArray(this.connectionObject.dateDataUrl, 'signs');
+
     this.sendToConsole('Object instantiated');
     this.sendToConsole('Connection dateData url: ' +  this.connectionObject.dateDataUrl);
     this.sendToConsole('Connection descriptionData url: ' +  this.connectionObject.descriptionDataUrl);
-
-    console.log(this.starSignsData);
 };
-
-/*
-var astrology = new Astrology();
-
-astrology.addCurrentDate(23);
-astrology.addCurrentMonth("March");
-
-
-console.log('Your sign is ' + astrology.fetchStarSign());
-
-var sign = astrology.fetchStarSign();
-
-console.log('The sign we are trying with is ' + sign);
-
-console.log('Description: ' + astrology.fetchStarSignDescription(sign));
-*/
