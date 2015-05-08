@@ -1,6 +1,6 @@
 # Astrology
 ### *An open source javascript project to simply getting general astrological information within web-applications*
-![astrology_image.jpeg](https://bitbucket.org/repo/LjXMnk/images/2298719127-astrology_image.jpeg)
+<img src="http://www.star-esseenia.org/assets/images/Person-Centered-Astrology.jpg" width="200" height="auto">
 
 ## Version Information
 ***
