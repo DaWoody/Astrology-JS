@@ -210,8 +210,8 @@ Astrology.prototype.sendToConsole = function(message){
 
 Astrology.prototype.initConnectionObject = function(connectionObject){
 
-    var dateDataUrl = '/js/astrology_date_data.json',
-        descriptionDataUrl =  '/js/astrology_description_data.json',
+    var dateDataUrl = '/js/astrology_data/astrology_signs_dates.json',
+        descriptionDataUrl =  '/js/astrology_data/astrology_signs_descriptions.json',
         returnObject;
 
         returnObject = {
