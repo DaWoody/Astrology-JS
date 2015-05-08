@@ -6,7 +6,7 @@
 *
 *       Author: Johan Wedfelt
 *       =====================
-*       Project Repo: https://github.org/DaWoody/Astrology-JS
+*       Project Repo: https://github.com/DaWoody/Astrology-JS.git
 *       ============
 *       Version 0.1
 *       ============
