@@ -53,26 +53,26 @@ var connectionObject = {
 var astrology = new Astrology(connectionObject);
 ```
 
-When interacting with the class there are two methods that saves the date ```addCurrentDate(dateNumber)``` that takes in a number between 1-31
-and ```addCurrentMonth(monthName)``` which takes in a string with a valid month-name such as for example *january*,
+When interacting with the class there are two methods that saves the date ```addDate(dateNumber)``` that takes in a number between 1-31
+and ```addMonth(monthName)``` which takes in a string with a valid month-name such as for example *january*,
 *february* etc...
 
 ```javascript
 
-astrology.addCurrentDate(dateNumber);
+astrology.addDate(dateNumber);
 
-astrology.addCurrentMonth(monthName);
+astrology.addMonth(monthName);
 
 ```
 
 To actually get the zodiac sign  or the zodiac sign description from an astrology object,
-the methods ```fetchStarSign``` and ```fetchStarSignDescription``` both fetches different strings that could be used
-within the DOM-structure or as the user see fit. The ```fetchStartSignDescription``` method returns a description and
-the ```fetchStarSign``` returns the zodiac name. They are called upon such as:
+the methods ```fetchZodiacSign``` and ```fetchZodiacSignDescription``` both fetches different strings that could be used
+within the DOM-structure or as the user see fit. The ```fetchZodiacSignDescription``` method returns a description and
+the ```fetchZodiacSign``` returns the zodiac name, both in the format of a string. They are called upon such as:
 
 ```
-astrology.fetchStarSign();
-astrology.fetchStarSignDescription();
+astrology.fetchZodiacSign();
+astrology.fetchZodiacSignDescription();
 ```
 
 

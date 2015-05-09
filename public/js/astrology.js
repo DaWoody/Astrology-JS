@@ -33,7 +33,7 @@ Astrology.prototype.xhrAndLoadJsonToDataArray = function(url, variable){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
                 var response = xhr.response;
-                _that.starSignsData[variable] = response[variable];
+                _that.zodiacSignsData[variable] = response[variable];
             }
         }
     };
@@ -42,7 +42,7 @@ Astrology.prototype.xhrAndLoadJsonToDataArray = function(url, variable){
     xhr.send();
 };
 
-Astrology.prototype.addCurrentMonth = function(monthNumberOrMonthName){
+Astrology.prototype.addMonth = function(monthNumberOrMonthName){
 
     var monthNumber = 0;
 
@@ -109,7 +109,7 @@ Astrology.prototype.addCurrentMonth = function(monthNumberOrMonthName){
     this.currentSearch.monthNumber = monthNumber;
 };
 
-Astrology.prototype.addCurrentDate = function(date){
+Astrology.prototype.addDate = function(date){
 
     if(typeof date === "string"){
         try {
@@ -126,7 +126,7 @@ Astrology.prototype.addCurrentDate = function(date){
 
 
 Astrology.prototype.showStoredDataArray = function(){
-    var storedArray = this.starSignsData;
+    var storedArray = this.zodiacSignsData;
 
     for(var i = 0; i<storedArray.length; i++){
         console.log('We had an object to print: ');
@@ -134,23 +134,23 @@ Astrology.prototype.showStoredDataArray = function(){
     }
 };
 
-Astrology.prototype.fetchStarSign = function(){
+Astrology.prototype.fetchZodiacSign = function(){
 
     var monthNumber = this.currentSearch.monthNumber,
         date = this.currentSearch.date,
         twoSignsArray = [],
-        starSign = '',
+        zodiacSign = '',
         zodiacNumber = 0,
-        starSigns = this.starSignsData.signs;
+        zodiacSigns = this.zodiacSignsData.signs;
 
-    for(var i = 0, length = starSigns.length; i < length; i++){
+    for(var i = 0, length = zodiacSigns.length; i < length; i++){
         //  First lets compare the months, will always just be two possible months that can
         //  be passed in to the two arrays
 
-        if(monthNumber === starSigns[i].start.monthNumber || monthNumber === starSigns[i].end.monthNumber){
+        if(monthNumber === zodiacSigns[i].start.monthNumber || monthNumber === zodiacSigns[i].end.monthNumber){
             //If the months end or start in the specific month number we have a go and should
             //save the date in our temporary array awesomeness ;)
-            twoSignsArray.push(starSigns[i]);
+            twoSignsArray.push(zodiacSigns[i]);
         }
     }
 
@@ -160,37 +160,37 @@ Astrology.prototype.fetchStarSign = function(){
 
         if(twoSignsArray[j].start.monthNumber === monthNumber){
             if(date > twoSignsArray[j].start.date){
-                starSign = twoSignsArray[j].zodiacName;
+                zodiacSign = twoSignsArray[j].zodiacName;
                 zodiacNumber = twoSignsArray[j].zodiacNumber;
             }
         }
 
         else if(twoSignsArray[j].end.monthNumber === monthNumber){
             if(date <= twoSignsArray[j].end.date){
-                starSign = twoSignsArray[j].zodiacName;
+                zodiacSign = twoSignsArray[j].zodiacName;
                 zodiacNumber = twoSignsArray[j].zodiacNumber;
             }
         }
     }
-    return starSign;
+    return zodiacSign;
 };
 
-Astrology.prototype.fetchStarSignDescription = function(){
-    var starSign = this.fetchStarSign(),
+Astrology.prototype.fetchZodiacSignDescription = function(){
+    var zodiacSign = this.fetchZodiacSign(),
         returnDescription = "",
-        descriptions = this.starSignsData.descriptions;
+        descriptions = this.zodiacSignsData.descriptions;
 
-    if(typeof starSign === "number"){
+    if(typeof zodiacSign === "number"){
         //A number lets fetch the description through a zodiacNumber check
         for(var i = 0, length = descriptions.length; i < length; i++){
-            if(descriptions[i].zodiacNumber === starSign){
+            if(descriptions[i].zodiacNumber === zodiacSign){
                 returnDescription = descriptions[i].description;
             }
         }
     } else {
         //We have a string we are checking against lets do this ;)
         for(var i = 0, length = descriptions.length; i < length; i++){
-            if(descriptions[i].zodiacName === starSign){
+            if(descriptions[i].zodiacName === zodiacSign){
                 returnDescription = descriptions[i].description;
             }
         }
@@ -246,7 +246,7 @@ Astrology.prototype.init = function(connectionObject){
         version:'0.1'
     };
 
-    this.starSignsData = {
+    this.zodiacSignsData = {
         signs: [],
         descriptions: []
     };

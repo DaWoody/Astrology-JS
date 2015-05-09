@@ -62,11 +62,11 @@
             var date = document.getElementById('dateInput').value;
             var month = document.getElementById('monthInput').value;
 
-            astrology.addCurrentDate(date);
-            astrology.addCurrentMonth(month);
+            astrology.addDate(date);
+            astrology.addMonth(month);
 
-            currentZodiacName = astrology.fetchStarSign();
-            currentZodiacDescription = astrology.fetchStarSignDescription();
+            currentZodiacName = astrology.fetchZodiacSign();
+            currentZodiacDescription = astrology.fetchZodiacSignDescription();
 
             //Lets update the DOM
             zodiacName.innerHTML = currentZodiacName;
