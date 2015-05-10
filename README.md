@@ -4,7 +4,7 @@
 
 ## Version Information
 ***
-Check out the [version information page](VersionInformation) for more information.
+Check out the [version information page](https://github.com/DaWoody/Astrology-JS/wiki/Version-Information) for more information.
 
 ## Description
 ***
