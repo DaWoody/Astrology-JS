@@ -5,6 +5,12 @@
 ## Version Information
 ***
 
+* v0.3
+* Updated the addDate() and addMonth() methods to be a bit more robust with the input provided, should now be more flexible
+towards inputs. addDate() should be able to take any number string and convert it to a number between 1-31 or at least put the default value to 31 if
+the user input was not correct. The addMonth() method similiary tries to parse the month value passed in from the user,
+now it will be able to parse between the numbers 1-12 and the names of the months, january, february etc.
+
 * v0.2
 * Default json data source altered to just be one file. Implementation on how to get data for description and generally the signs
 are still remaining in this version, making it easier to have different api endpoints for fetching the resources.

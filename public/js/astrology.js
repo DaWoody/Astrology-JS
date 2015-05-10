@@ -8,7 +8,7 @@
 *       =====================
 *       Project Repo: https://github.com/DaWoody/Astrology-JS.git
 *       ============
-*       Version 0.2
+*       Version 0.3
 *       ============
 *       Description:
 *       ============
@@ -21,10 +21,12 @@
 
 
 var Astrology = function(connectionObject){
+    //On class initiation
     this.init(connectionObject);
 };
 
 Astrology.prototype.xhrAndLoadJsonToDataArray = function(url, variable){
+    //XHR request help method for loading the data
 
     var _that = this,
         xhr = new XMLHttpRequest();
@@ -43,13 +45,16 @@ Astrology.prototype.xhrAndLoadJsonToDataArray = function(url, variable){
 };
 
 Astrology.prototype.addMonth = function(monthNumberOrMonthName){
+    //Add the month name or number
 
-    var monthNumber = 0;
+    var monthNumber = 0,
+        parsedNumber;
 
     if(typeof monthNumberOrMonthName === "number"){
         monthNumber = monthNumberOrMonthName;
     }
     else if(typeof  monthNumberOrMonthName === "string"){
+
         var monthNameLowerCase = monthNumberOrMonthName.toLowerCase();
 
         switch(monthNameLowerCase){
@@ -102,37 +107,47 @@ Astrology.prototype.addMonth = function(monthNumberOrMonthName){
                 break;
 
             default:
-                console.log('Did not enter a valid month as a string');
+                parsedNumber = parseInt(monthNumberOrMonthName, 10);
+                if(parsedNumber !== NaN){
+                    if(parsedNumber > 0 && parsedNumber <= 12){
+                        monthNumber = parsedNumber;
+                    }
+                    else{
+                        this.sendToConsole('Did not enter a valid month value. Valid values include the name of month or its corresponding number');
+                    }
+                }
+                else {
+                    this.sendToConsole('Did not enter a valid month value. Valid values include the name of month or its corresponding number');
+                }
         }
     }
-
     this.currentSearch.monthNumber = monthNumber;
 };
 
-Astrology.prototype.addDate = function(date){
+Astrology.prototype.addDay = function(date){
+    // Add the day of the month as a number between 1-31
 
     if(typeof date === "string"){
         try {
             var dateNumber = parseInt(date, 10);
-            this.currentSearch.date = dateNumber;
+
+            //Lets control so the date is within the range 1-31
+            if(dateNumber > 0 && dateNumber <= 31){
+                this.currentSearch.date = dateNumber;
+            } else {
+                dateNumber = 31;
+                this.sendToConsole('Error must provide a valid day of the month which means a number between 1-31. Now date is set to the last in the month (31)');
+            }
         } catch(e){
             this.sendErrorMessageToConsole('We threw and error the date we tried to set is NOT a string that could be parsed into a number', e);
         }
     }
-    this.currentSearch.date = date;
-};
-
-
-Astrology.prototype.showStoredDataArray = function(){
-    var storedArray = this.zodiacSignsData;
-
-    for(var i = 0; i<storedArray.length; i++){
-        console.log('We had an object to print: ');
-        console.log(storedArray[i]);
-    }
+    this.currentSearch.date = dateNumber;
 };
 
 Astrology.prototype.fetchZodiacSign = function(){
+    //Fetches the zodiac sign from the data that has been loaded into the class object
+    //and the data provided by the user
 
     var monthNumber = this.currentSearch.monthNumber,
         date = this.currentSearch.date,
@@ -174,6 +189,7 @@ Astrology.prototype.fetchZodiacSign = function(){
 };
 
 Astrology.prototype.fetchZodiacSignDescription = function(){
+    //Fetches the zodiac sign description
     var zodiacSign = this.fetchZodiacSign(),
         returnDescription = "",
         descriptions = this.zodiacSignsData.descriptions;
@@ -197,6 +213,7 @@ Astrology.prototype.fetchZodiacSignDescription = function(){
 };
 
 Astrology.prototype.sendToConsole = function(message){
+    //Helper message method
 
     var consoleMessage =  "=================================" + "\n";
         consoleMessage += "# Astrology" + "\n";
@@ -207,6 +224,7 @@ Astrology.prototype.sendToConsole = function(message){
 };
 
 Astrology.prototype.sendErrorMessageToConsole = function(message, error){
+    //Helper message method
 
     var consoleMessage =  "=================================" + "\n";
         consoleMessage += "# Astrology" + "\n";
@@ -218,6 +236,7 @@ Astrology.prototype.sendErrorMessageToConsole = function(message, error){
 };
 
 Astrology.prototype.initConnectionObject = function(connectionObject){
+    //Lets initiate the connectionObject
 
     var dateDataUrl = '/js/astrology_data/astrology_data.json',
         descriptionDataUrl =  '/js/astrology_data/astrology_data.json',
@@ -243,16 +262,19 @@ Astrology.prototype.initConnectionObject = function(connectionObject){
 }
 
 Astrology.prototype.init = function(connectionObject){
+    //The init function, does the work and sets up the rest of the instantiated class object
 
+    //Setup the connectionObject
     var connectionObjectModified = this.initConnectionObject(connectionObject);
 
+    //Declare some objects and variables used within the instantiated class
     this.connectionObject = {
         dateDataUrl: connectionObjectModified.dateDataUrl,
         descriptionDataUrl: connectionObjectModified.descriptionDataUrl
     };
 
     this.classData = {
-        version:'0.2'
+        version:'0.3'
     };
 
     this.zodiacSignsData = {
@@ -271,7 +293,6 @@ Astrology.prototype.init = function(connectionObject){
     this.xhrAndLoadJsonToDataArray(this.connectionObject.descriptionDataUrl, 'descriptions');
     this.xhrAndLoadJsonToDataArray(this.connectionObject.dateDataUrl, 'signs');
 
-    this.sendToConsole('Object instantiated');
-    this.sendToConsole('Connection dateData url: ' +  this.connectionObject.dateDataUrl);
-    this.sendToConsole('Connection descriptionData url: ' +  this.connectionObject.descriptionDataUrl);
+    //Print an instantiation message to the console
+    this.sendToConsole('Object instantiated with dateData url ' +  this.connectionObject.dateDataUrl + ' and descriptionData url: ' +  this.connectionObject.descriptionDataUrl);
 };
