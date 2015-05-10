@@ -5,6 +5,10 @@
 ## Version Information
 ***
 
+* v0.2
+* Default json data source altered to just be one file. Implementation on how to get data for description and generally the signs
+are still remaining in this version, making it easier to have different api endpoints for fetching the resources.
+
 * v0.1
 * Class loads external json data at class initiation
 * some public methods are accessible, for instance by saving the month and date you can get information about your zodiac sign, with a description of your traits
@@ -16,7 +20,7 @@
 This project is aimed to be an open source project to design a simple javascript class that could be used to generate general astrological information to individuals
 based on birth date information and such. The idea is that the class could be instantiated and used in a general web-project and then accessed through a set of different public methods
 that add data, do calculations and present information back to the user. Currently the class is meant to load some general information data about the different zodiac signs
-from a json resource. The default settings is to load the data from two json-files to get the specific date information for each zodiac signs aswell as a more detailed description about
+from a json resource. The default settings is to load the data from a json-files to get the specific date information for each zodiac signs aswell as a more detailed description about
 what a specific zodiac sign entails. The source for the json data could be altered through providing a ```connectionObject``` to the constructor method as explained below.
 
 ## How to use the Astrology class

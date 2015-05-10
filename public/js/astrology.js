@@ -8,7 +8,7 @@
 *       =====================
 *       Project Repo: https://github.com/DaWoody/Astrology-JS.git
 *       ============
-*       Version 0.1
+*       Version 0.2
 *       ============
 *       Description:
 *       ============
@@ -116,11 +116,9 @@ Astrology.prototype.addDate = function(date){
             var dateNumber = parseInt(date, 10);
             this.currentSearch.date = dateNumber;
         } catch(e){
-            console.log('We threw and error the date we tried to set is NOT a string that could be parsed into a number');
-            console.log(e);
+            this.sendErrorMessageToConsole('We threw and error the date we tried to set is NOT a string that could be parsed into a number', e);
         }
     }
-    //FIX AND ADD STUFF HERE
     this.currentSearch.date = date;
 };
 
@@ -208,10 +206,21 @@ Astrology.prototype.sendToConsole = function(message){
     console.log(consoleMessage);
 };
 
+Astrology.prototype.sendErrorMessageToConsole = function(message, error){
+
+    var consoleMessage =  "=================================" + "\n";
+        consoleMessage += "# Astrology" + "\n";
+        consoleMessage += "# Version: " + this.classData.version + " \n";
+        consoleMessage += "# Error: " + message + " \n";
+        consoleMessage += "=================================" + "\n";
+    console.log(consoleMessage);
+    console.log(error);
+};
+
 Astrology.prototype.initConnectionObject = function(connectionObject){
 
-    var dateDataUrl = '/js/astrology_data/astrology_signs_dates.json',
-        descriptionDataUrl =  '/js/astrology_data/astrology_signs_descriptions.json',
+    var dateDataUrl = '/js/astrology_data/astrology_data.json',
+        descriptionDataUrl =  '/js/astrology_data/astrology_data.json',
         returnObject;
 
         returnObject = {
@@ -243,7 +252,7 @@ Astrology.prototype.init = function(connectionObject){
     };
 
     this.classData = {
-        version:'0.1'
+        version:'0.2'
     };
 
     this.zodiacSignsData = {
