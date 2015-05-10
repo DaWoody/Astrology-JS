@@ -49,14 +49,14 @@ var astrology = new Astrology(connectionObject);
 ```
 
 When interacting with the class there are two methods that saves the date ```addDay(dayNumber)``` that takes in a number between 1-31
-and ```addMonth(monthName)``` which takes in a string with a valid month-name such as for example *january*,
-*february* etc...
+and ```addMonth(monthNameOrMonthNumber)``` which takes in a string with a valid month-name such as for example *january*,
+*february* etc... **or** a valid month-number string ranging from 1-12, such as *1*, *12* or *01*, *07* for instance.
 
 ```javascript
 
 astrology.addDay(dayNumber);
 
-astrology.addMonth(monthName);
+astrology.addMonth(monthNameOrMonthNumber);
 
 ```
 
@@ -69,5 +69,4 @@ the ```fetchZodiacSign``` returns the zodiac name, both in the format of a strin
 astrology.fetchZodiacSign();
 astrology.fetchZodiacSignDescription();
 ```
-
 
