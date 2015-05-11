@@ -6,6 +6,10 @@
 ***
 Check out the [version information page](https://github.com/DaWoody/Astrology-JS/wiki/Version-Information) for more information.
 
+## License
+***
+This software is distributed as Open Source software following the [GNU General Public License, version 3 (GPL-3.0)](http://opensource.org/licenses/GPL-3.0)
+
 ## Description
 ***
 This project is aimed to be an open source project to design a simple javascript class that could be used to generate general astrological information to individuals
