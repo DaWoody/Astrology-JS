@@ -10,6 +10,8 @@
 *       ============
 *       Version 0.3
 *       ============
+*       License Url: http://opensource.org/licenses/GPL-3.0
+*       ============
 *       Description:
 *       ============
 *       A javascript class that initiates by loading some Astrological data to the instantiated class
