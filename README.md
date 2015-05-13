@@ -54,13 +54,18 @@ var astrology = new Astrology(connectionObject);
 
 When interacting with the class there are two methods that saves the date ```addDay(dayNumber)``` that takes in a number between 1-31
 and ```addMonth(monthNameOrMonthNumber)``` which takes in a string with a valid month-name such as for example *january*,
-*february* etc... **or** a valid month-number string ranging from 1-12, such as *1*, *12* or *01*, *07* for instance.
+*february* etc... **or** a valid month-number string ranging from 1-12, such as *1*, *12* or *01*, *07* for instance. Then there is also a method
+called ```addFullDateString(dateString)``` which takes in a date string in the format YYYY-MM-DD, this is naturally supported and the output of the ```<input type="date">```
+object which in turn is supported by most modern browsers, except Internet Explorer. [Read more here](http://www.w3schools.com/htmL/html_form_input_types.asp).
+
 
 ```javascript
 
 astrology.addDay(dayNumber);
 
 astrology.addMonth(monthNameOrMonthNumber);
+
+astrology.addFullDateString(dateString)
 
 ```
 

@@ -147,6 +147,24 @@ Astrology.prototype.addDay = function(date){
     this.currentSearch.date = dateNumber;
 };
 
+Astrology.prototype.addFullDateString = function(dateString){
+    // Lets just parse out the month and the day from the full date string and then use the methods
+    // we already have created so we can reuse the code we already have, awesomeness ;)
+
+    var dateStringArray = dateString.split('-');
+    if(dateStringArray.length === 3 && dateStringArray[0].length === 4) {
+        //Lets try parsing the month and day, if they are strings lets proceed adding the date as a current date
+        if(typeof dateStringArray[1] === 'string' && typeof dateStringArray[2] === 'string'){
+            this.addMonth(dateStringArray[1]);
+            this.addDay(dateStringArray[2]);
+        } else {
+            this.sendToConsole('Wrong date format sent to the addFullDateString method, needs to be a string with the format YYYY-MM-DD')
+        }
+    } else{
+        this.sendToConsole('Wrong date format sent to the addFullDateString method, needs to be a string with the format YYYY-MM-DD')
+    }
+};
+
 Astrology.prototype.fetchZodiacSign = function(){
     //Fetches the zodiac sign from the data that has been loaded into the class object
     //and the data provided by the user
