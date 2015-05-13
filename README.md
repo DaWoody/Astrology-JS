@@ -78,4 +78,5 @@ the ```fetchZodiacSign``` returns the zodiac name, both in the format of a strin
 astrology.fetchZodiacSign();
 astrology.fetchZodiacSignDescription();
 ```
+To get a more hands on example on how to implement the class and use it within an actual web-application check out the [Html implementation code example](https://github.com/DaWoody/Astrology-JS/wiki/Html-implementation-code-example)
 
