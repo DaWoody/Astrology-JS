@@ -52,11 +52,11 @@ var connectionObject = {
 var astrology = new Astrology(connectionObject);
 ```
 
-When interacting with the class there are two methods that saves the date ```addDay(dayNumber)``` that takes in a number between 1-31
-and ```addMonth(monthNameOrMonthNumber)``` which takes in a string with a valid month-name such as for example *january*,
+When interacting with the class there are three methods that saves the date needed to find out the zodiac sign. First there is the method ```addDay(dayNumber)``` that takes in a number between 1-31
+as a valid day number in a month, and then there is ```addMonth(monthNameOrMonthNumber)``` which takes in a string with a valid month-name such as for example *january*,
 *february* etc... **or** a valid month-number string ranging from 1-12, such as *1*, *12* or *01*, *07* for instance. Then there is also a method
-called ```addFullDateString(dateString)``` which takes in a date string in the format YYYY-MM-DD, this is naturally supported and the output of the ```<input type="date">```
-object which in turn is supported by most modern browsers, except Internet Explorer. [Read more here](http://www.w3schools.com/htmL/html_form_input_types.asp).
+called ```addFullDateString(dateString)``` which takes in a date string in the format YYYY-MM-DD. This is naturally supported as the output from the native html5-method  ```<input type="date">```
+, which in turn is supported by most modern browsers, except Internet Explorer. [Read more here](http://www.w3schools.com/htmL/html_form_input_types.asp).
 
 
 ```javascript
