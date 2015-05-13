@@ -8,7 +8,7 @@
 *       =====================
 *       Project Repo: https://github.com/DaWoody/Astrology-JS.git
 *       ============
-*       Version 0.3
+*       Version 0.4
 *       ============
 *       License Url: http://opensource.org/licenses/GPL-3.0
 *       ============
@@ -294,7 +294,7 @@ Astrology.prototype.init = function(connectionObject){
     };
 
     this.classData = {
-        version:'0.3'
+        version:'0.4'
     };
 
     this.zodiacSignsData = {
