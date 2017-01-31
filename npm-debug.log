@@ -5,23 +5,106 @@
 2 info using npm@3.10.3
 3 info using node@v6.3.0
 4 verbose publish [ '.' ]
-5 verbose stack Error: Invalid version: "0.5"
-5 verbose stack     at Object.module.exports.fixVersionField (/usr/local/lib/node_modules/npm/node_modules/normalize-package-data/lib/fixer.js:191:13)
-5 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/normalize-package-data/lib/normalize.js:32:38
-5 verbose stack     at Array.forEach (native)
-5 verbose stack     at normalize (/usr/local/lib/node_modules/npm/node_modules/normalize-package-data/lib/normalize.js:31:15)
-5 verbose stack     at final (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:349:5)
-5 verbose stack     at then (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:124:5)
-5 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:311:12
-5 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
-5 verbose stack     at tryToString (fs.js:455:3)
-5 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:442:12)
-6 verbose cwd /Applications/XAMPP/xamppfiles/htdocs/private/Astrology-JS
-7 error Darwin 15.6.0
-8 error argv "/usr/local/Cellar/node/6.3.0/bin/node" "/usr/local/bin/npm" "publish"
-9 error node v6.3.0
-10 error npm  v3.10.3
-11 error Invalid version: "0.5"
-12 error If you need help, you may report this error at:
-12 error     <https://github.com/npm/npm/issues>
-13 verbose exit [ 1, true ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Applications/XAMPP/xamppfiles/htdocs/private/Astrology-JS',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/johanwedfelt/.npm/astrology/0.5.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/johanwedfelt/.npm correctMkdir not in flight; initializing
+10 info lifecycle astrology@0.5.0~prepublish: astrology@0.5.0
+11 silly lifecycle astrology@0.5.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/johanwedfelt/.npm/astrology/0.5.0/package.tgz',
+12 verbose tar pack   '/Applications/XAMPP/xamppfiles/htdocs/private/Astrology-JS' ]
+13 verbose tarball /Users/johanwedfelt/.npm/astrology/0.5.0/package.tgz
+14 verbose folder /Applications/XAMPP/xamppfiles/htdocs/private/Astrology-JS
+15 verbose addLocalTarball adding from inside cache /Users/johanwedfelt/.npm/astrology/0.5.0/package.tgz
+16 verbose correctMkdir /Users/johanwedfelt/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd astrology@0.5.0
+18 verbose afterAdd /Users/johanwedfelt/.npm/astrology/0.5.0/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/johanwedfelt/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/johanwedfelt/.npm/astrology/0.5.0/package/package.json written
+21 silly publish { name: 'astrology',
+21 silly publish   version: '0.5.0',
+21 silly publish   description: 'A library for getting some Astrology info from the js side',
+21 silly publish   main: 'app.js',
+21 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/DaWoody/Astrology-JS.git' },
+21 silly publish   keywords: [ 'Astrology', 'javascript', 'library' ],
+21 silly publish   author: { name: 'J Wedfelt' },
+21 silly publish   license: 'ISC',
+21 silly publish   dependencies: { express: '^4.12.3' },
+21 silly publish   readme: '# Astrology\n### *An open source javascript project to simply getting general astrological information within web-applications*\n<img src="http://www.star-esseenia.org/assets/images/Person-Centered-Astrology.jpg" width="200" height="auto">\n\n## Version Information\n***\nCheck out the [version information page](https://github.com/DaWoody/Astrology-JS/wiki/Version-Information) for more information.\n\n## License\n***\nThis software is distributed as Open Source software following the [GNU General Public License, version 3 (GPL-3.0)](http://opensource.org/licenses/GPL-3.0)\n\n## Description\n***\nThis project is aimed to be an open source project to design a simple javascript class that could be used to generate general astrological information to individuals\nbased on birth date information and such. The idea is that the class could be instantiated and used in a general web-project and then accessed through a set of different public methods\nthat add data, do calculations and present information back to the user. Currently the class is meant to load some general information data about the different zodiac signs\nfrom a json resource. The default settings is to load the data from a json-files to get the specific date information for each zodiac signs aswell as a more detailed description about\nwhat a specific zodiac sign entails. The source for the json data could be altered through providing a ```connectionObject``` to the constructor method as explained below.\n\n## How to use the Astrology class\n***\n\nWithin the web-pages/applications you would like to use the class, you should include the script, within the ```<head>..</head>``` section or preferably within the last section\nof the ```<body>..</body>``` section, such as for instance\n\n```html\n...\n<script src="../js/astrology.js"></script>\n</body>\n</html>\n```\n\nThen within an actual javascript file, (could be within a jquery statement aswell), the class should be instantiated\nwith an optional ```connectionObject``` parameter being passed to the constructor like:\n\n```javascript\n\nvar astrology = new Astrology();\n```\n\nor..\n\n\n```javascript\n\nvar connectionObject = {\n     dateDataUrl: url_to_where_to_fetch_the_date_data,\n     descriptionDataUrl: url_to_where_to_fetch_the_description_data\n }\n\nvar astrology = new Astrology(connectionObject);\n```\n\nWhen interacting with the class there are three methods that saves the date needed to find out the zodiac sign. First there is the method ```addDay(dayNumber)``` that takes in a number between 1-31\nas a valid day number in a month, and then there is ```addMonth(monthNameOrMonthNumber)``` which takes in a string with a valid month-name such as for example *january*,\n*february* etc... **or** a valid month-number string ranging from 1-12, such as *1*, *12* or *01*, *07* for instance. Then there is also a method\ncalled ```addFullDateString(dateString)``` which takes in a date string in the format YYYY-MM-DD. This is naturally supported as the output from the native html5-method  ```<input type="date">```\n, which in turn is supported by most modern browsers, except Internet Explorer. [Read more here](http://www.w3schools.com/htmL/html_form_input_types.asp).\n\n\n```javascript\n\nastrology.addDay(dayNumber);\n\nastrology.addMonth(monthNameOrMonthNumber);\n\nastrology.addFullDateString(dateString)\n\n```\n\nTo actually get the zodiac sign  or the zodiac sign description from an astrology object,\nthe methods ```fetchZodiacSign``` and ```fetchZodiacSignDescription``` both fetches different strings that could be used\nwithin the DOM-structure or as the user see fit. The ```fetchZodiacSignDescription``` method returns a description and\nthe ```fetchZodiacSign``` returns the zodiac name, both in the format of a string. They are called upon such as:\n\n```\nastrology.fetchZodiacSign();\nastrology.fetchZodiacSignDescription();\n```\nTo get a more hands on example on how to implement the class and use it within an actual web-application check out the [Html implementation code example](https://github.com/DaWoody/Astrology-JS/wiki/Html-implementation-code-example)\n\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '555e7295e4a3e46780e1da9e3649d5850c0dbd29',
+21 silly publish   bugs: { url: 'https://github.com/DaWoody/Astrology-JS/issues' },
+21 silly publish   homepage: 'https://github.com/DaWoody/Astrology-JS#readme',
+21 silly publish   _id: 'astrology@0.5.0',
+21 silly publish   _shasum: '0e052861c10369de161cb9fce6bd8ef98b094012',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name astrology
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'astrology',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'astrology',
+26 silly mapToRegistry   name: 'astrology',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/astrology
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/johanwedfelt/.npm/astrology/0.5.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/astrology
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 09:01:59
+33 verbose request using bearer token for auth
+34 verbose request id 09fe9884ec5fa321
+35 http request PUT https://registry.npmjs.org/astrology
+36 http 403 https://registry.npmjs.org/astrology
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '103',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Tue, 31 Jan 2017 08:01:58 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-bma7022-BMA',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1485849717.212182,VS0,VE873',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/johanwedfelt/.npm/registry.npmjs.org/astrology on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: you do not have permission to publish "astrology". Are you logged in as the correct user? : astrology
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid astrology
+43 verbose cwd /Applications/XAMPP/xamppfiles/htdocs/private/Astrology-JS
+44 error Darwin 15.6.0
+45 error argv "/usr/local/Cellar/node/6.3.0/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v6.3.0
+47 error npm  v3.10.3
+48 error code E403
+49 error you do not have permission to publish "astrology". Are you logged in as the correct user? : astrology
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
