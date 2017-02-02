@@ -1,5 +1,7 @@
 # Astrology
 ### *An open source javascript project to simply getting general astrological information within web-applications*
+[![npm version](https://img.shields.io/npm/v/astrology-js.svg?style=flat-square)](https://www.npmjs.com/package/astrology-js)  ![Download](https://img.shields.io/npm/dm/astrology-js.svg?style=flat-square)
+
 <img src="http://www.star-esseenia.org/assets/images/Person-Centered-Astrology.jpg" width="200" height="auto">
 
 ## Version Information
